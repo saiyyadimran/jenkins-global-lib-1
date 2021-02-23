@@ -14,12 +14,12 @@ pipeline {
         }
         stage('Maven Clean Build') {
             steps {
-                sh 'cd samplemavenproject'
-                sh 'ls -ltr'
+                sh "cd samplemavenproject"
+                sh "ls -ltr"
                 mvnCleanInstallWithoutProfile(
                   skipTest: true
                 )
-                sh 'ls -ltr'
+                sh "ls -ltr"
             }   
         }
     }
