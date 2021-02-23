@@ -1,0 +1,21 @@
+@Library('global-shared-pipeline-lib-new') _
+ 
+pipeline {
+    agent any
+    stages {
+        stage('Git Checkout') {
+            steps {
+                gitCheckout(
+                    branch: "master",
+                    url: "https://github.com/saiyyadimran/jenkins-global-lib",
+                    credentialsId: "GIT1"
+                )
+            }
+        }
+        stage('List Directory') {
+            steps {
+                sh 'ls -ltr'
+            }
+        }
+    }
+}
