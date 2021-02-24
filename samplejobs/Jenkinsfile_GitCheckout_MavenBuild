@@ -14,7 +14,9 @@ pipeline {
         }
         stage('Maven Clean Build') {
             steps {
-                sh "cd /var/jenkins_home/workspace/SampleJobs/MavenCleanInstallDemo/samplemavenproject"
+                sh "pwd"
+                sh "ls -ltr"
+                sh "cd samplemavenproject"
                 sh "ls -ltr"
                 sh "pwd"
                 mvnCleanInstallWithoutProfile(
