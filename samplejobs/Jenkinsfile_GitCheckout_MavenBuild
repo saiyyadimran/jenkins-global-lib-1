@@ -18,8 +18,8 @@ pipeline {
             }
         }
         stage('Maven Clean Build') {
-			container('maven') {
-				steps {
+			steps {
+				container('maven') {
 					sh "pwd"
 					sh "ls -ltr"
 					sh "cd samplemavenproject"
@@ -29,7 +29,7 @@ pipeline {
 					  skipTest: true
 					)
 					sh "ls -ltr"
-				} 
+				}
 			}
         }
     }
