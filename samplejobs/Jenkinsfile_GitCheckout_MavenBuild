@@ -6,11 +6,6 @@ containers: [
 	pipeline {
 		agent any
 		stages {
-			stage('Container Creation') {
-				steps {
-					podTemplate()
-				}
-			}
 			stage('Git Checkout') {
 				steps {
 					gitCheckout(
