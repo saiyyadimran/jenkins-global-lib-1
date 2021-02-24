@@ -1,24 +1,23 @@
 @Library('global-shared-pipeline-lib-new') _
-pipeline {
-podTemplate(
-containers: [
-  containerTemplate(name: 'maven', image: 'maven:3.6.1-jdk-8', ttyEnabled: true, command: 'cat')
-]) 
-
-		agent any
+	pipeline {
 		stages {
-			stage('Git Checkout') {
+			stage('Container Creation') {
 				steps {
-					gitCheckout(
-						branch: "master",
-						url: "https://github.com/saiyyadimran/jenkins-global-lib",
-						credentialsId: "GIT1"
-					)
+					selectiveContainerCreationLatest()
 				}
 			}
-			stage('Maven Clean Build') {
-				steps {
-					container('maven') {
+			container('maven') {
+				stage('Git Checkout') {
+					steps {
+						gitCheckout(
+							branch: "master",
+							url: "https://github.com/saiyyadimran/jenkins-global-lib",
+							credentialsId: "GIT1"
+						)
+					}
+				}
+				stage('Maven Clean Build') {
+					steps {
 						sh "pwd"
 						sh "ls -ltr"
 						sh "cd samplemavenproject"
@@ -32,5 +31,5 @@ containers: [
 				}
 			}
 		}
+	}
 
-}
