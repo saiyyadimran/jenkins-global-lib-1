@@ -1,9 +1,10 @@
 @Library('global-shared-pipeline-lib-new') _
+pipeline {
 podTemplate(
 containers: [
   containerTemplate(name: 'maven', image: 'maven:3.6.1-jdk-8', ttyEnabled: true, command: 'cat')
 ]) {
-	
+
 		agent any
 		stages {
 			stage('Git Checkout') {
@@ -31,5 +32,5 @@ containers: [
 				}
 			}
 		}
-	
+}
 }
