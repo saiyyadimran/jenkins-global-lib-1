@@ -3,6 +3,11 @@
 pipeline {
     agent any
     stages {
+		stage('Container Creation') {
+            steps {
+                podTemplate()
+            }
+        }
         stage('Git Checkout') {
             steps {
                 gitCheckout(
@@ -13,17 +18,19 @@ pipeline {
             }
         }
         stage('Maven Clean Build') {
-            steps {
-                sh "pwd"
-                sh "ls -ltr"
-                sh "cd samplemavenproject"
-                sh "ls -ltr"
-                sh "pwd"
-                mvnCleanInstallWithoutProfile(
-                  skipTest: true
-                )
-                sh "ls -ltr"
-            }   
+			container('maven') {
+				steps {
+					sh "pwd"
+					sh "ls -ltr"
+					sh "cd samplemavenproject"
+					sh "ls -ltr"
+					sh "pwd"
+					mvnCleanInstallWithoutProfile(
+					  skipTest: true
+					)
+					sh "ls -ltr"
+				} 
+			}
         }
     }
 }
