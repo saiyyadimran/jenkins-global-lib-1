@@ -9,30 +9,31 @@
 					selectiveContainerCreationLatest()
 				}
 			}
-			container('maven') {
-				stage('Git Checkout') {
-					steps {
-						gitCheckout(
-							branch: "master",
-							url: "https://github.com/saiyyadimran/jenkins-global-lib",
-							credentialsId: "GIT1"
-						)
+			stage('Next stage') {
+				container('maven') {
+					stage('Git Checkout') {
+						steps {
+							gitCheckout(
+								branch: "master",
+								url: "https://github.com/saiyyadimran/jenkins-global-lib",
+								credentialsId: "GIT1"
+							)
+						}
 					}
-				}
-				stage('Maven Clean Build') {
-					steps {
-						sh "pwd"
-						sh "ls -ltr"
-						sh "cd samplemavenproject"
-						sh "ls -ltr"
-						sh "pwd"
-						mvnCleanInstallWithoutProfile(
-						  skipTest: true
-						)
-						sh "ls -ltr"
+					stage('Maven Clean Build') {
+						steps {
+							sh "pwd"
+							sh "ls -ltr"
+							sh "cd samplemavenproject"
+							sh "ls -ltr"
+							sh "pwd"
+							mvnCleanInstallWithoutProfile(
+							  skipTest: true
+							)
+							sh "ls -ltr"
+						}
 					}
 				}
 			}
 		}
 	}
-
