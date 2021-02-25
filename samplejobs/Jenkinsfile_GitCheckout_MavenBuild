@@ -1,5 +1,8 @@
 @Library('global-shared-pipeline-lib-new') _
 	pipeline {
+	agent {
+        label ''
+    }
 		stages {
 			stage('Container Creation') {
 				steps {
